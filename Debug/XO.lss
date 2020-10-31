@@ -1,0 +1,956 @@
+
+XO.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000492  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000c  00800060  00000492  00000526  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000000d  0080006c  0080006c  00000532  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000532  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000038  00000000  00000000  00000562  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000645  00000000  00000000  0000059a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000256  00000000  00000000  00000bdf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000238  00000000  00000000  00000e35  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000b0  00000000  00000000  00001070  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000033d  00000000  00000000  00001120  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000045d  00000000  00000000  0000145d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000e0  00000000  00000000  000018ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__vector_19>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e2 e9       	ldi	r30, 0x92	; 146
+  68:	f4 e0       	ldi	r31, 0x04	; 4
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	ac 36       	cpi	r26, 0x6C	; 108
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	ac e6       	ldi	r26, 0x6C	; 108
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a9 37       	cpi	r26, 0x79	; 121
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 b0 01 	call	0x360	; 0x360 <main>
+  8a:	0c 94 47 02 	jmp	0x48e	; 0x48e <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <__vector_19>:
+void PortsInitialization(void);
+// Timers initialization function
+void TimersInitialization(void);
+
+// Timer 0 overflow interrupt
+ISR(TIMER0_COMP_vect){
+  92:	1f 92       	push	r1
+  94:	0f 92       	push	r0
+  96:	0f b6       	in	r0, 0x3f	; 63
+  98:	0f 92       	push	r0
+  9a:	11 24       	eor	r1, r1
+  9c:	0f 93       	push	r16
+  9e:	1f 93       	push	r17
+  a0:	2f 93       	push	r18
+  a2:	3f 93       	push	r19
+  a4:	4f 93       	push	r20
+  a6:	5f 93       	push	r21
+  a8:	6f 93       	push	r22
+  aa:	7f 93       	push	r23
+  ac:	8f 93       	push	r24
+  ae:	9f 93       	push	r25
+  b0:	af 93       	push	r26
+  b2:	bf 93       	push	r27
+  b4:	cf 93       	push	r28
+  b6:	df 93       	push	r29
+  b8:	ef 93       	push	r30
+  ba:	ff 93       	push	r31
+	// N is for the Nth row to show up (we have 3 rows)
+	uint8_t dynamicIndicationFlag;
+	// Dynamic indication function allows to show the matrix
+	// We will use it in the timer
+	void DynamicIndication(void){
+		PORTD |= ((1 << ROW_0) | (1 << ROW_1) | (1 << ROW_2));
+  bc:	82 b3       	in	r24, 0x12	; 18
+  be:	80 6e       	ori	r24, 0xE0	; 224
+  c0:	82 bb       	out	0x12, r24	; 18
+		PORTC &= ~((1 << COL_R_0) | (1 << COL_R_1) | (1 << COL_R_2) | (1 << COL_G_0) | (1 << COL_G_1) | (1 << COL_G_2));
+  c2:	85 b3       	in	r24, 0x15	; 21
+  c4:	80 7c       	andi	r24, 0xC0	; 192
+  c6:	85 bb       	out	0x15, r24	; 21
+		PORTD &= ~((1 << COL_B_0) | (1 << COL_B_1) | (1 << COL_B_2));
+  c8:	82 b3       	in	r24, 0x12	; 18
+  ca:	88 7f       	andi	r24, 0xF8	; 248
+  cc:	82 bb       	out	0x12, r24	; 18
+  ce:	80 e0       	ldi	r24, 0x00	; 0
+  d0:	90 e0       	ldi	r25, 0x00	; 0
+		for (uint8_t i = 0; i < COLS_AMOUNT; i++){
+			if (states[dynamicIndicationFlag][i] == OFF){
+  d2:	e8 e7       	ldi	r30, 0x78	; 120
+  d4:	f0 e0       	ldi	r31, 0x00	; 0
+			}
+			else if (states[dynamicIndicationFlag][i] == RED){
+				PORTC |= (1 << redColumns[i]);
+			}
+			else if (states[dynamicIndicationFlag][i] == GREEN){
+				PORTC |= (1 << greenColumns[i]);
+  d6:	41 e0       	ldi	r20, 0x01	; 1
+  d8:	50 e0       	ldi	r21, 0x00	; 0
+			}
+			if ((dynamicIndicationFlag == currentRow) and (i == currentColumn)){
+  da:	c5 e7       	ldi	r28, 0x75	; 117
+  dc:	d0 e0       	ldi	r29, 0x00	; 0
+  de:	66 e7       	ldi	r22, 0x76	; 118
+  e0:	70 e0       	ldi	r23, 0x00	; 0
+  e2:	18 2f       	mov	r17, r24
+	void DynamicIndication(void){
+		PORTD |= ((1 << ROW_0) | (1 << ROW_1) | (1 << ROW_2));
+		PORTC &= ~((1 << COL_R_0) | (1 << COL_R_1) | (1 << COL_R_2) | (1 << COL_G_0) | (1 << COL_G_1) | (1 << COL_G_2));
+		PORTD &= ~((1 << COL_B_0) | (1 << COL_B_1) | (1 << COL_B_2));
+		for (uint8_t i = 0; i < COLS_AMOUNT; i++){
+			if (states[dynamicIndicationFlag][i] == OFF){
+  e4:	20 81       	ld	r18, Z
+  e6:	30 e0       	ldi	r19, 0x00	; 0
+  e8:	d9 01       	movw	r26, r18
+  ea:	aa 0f       	add	r26, r26
+  ec:	bb 1f       	adc	r27, r27
+  ee:	a2 0f       	add	r26, r18
+  f0:	b3 1f       	adc	r27, r19
+  f2:	a8 0f       	add	r26, r24
+  f4:	b9 1f       	adc	r27, r25
+  f6:	a4 59       	subi	r26, 0x94	; 148
+  f8:	bf 4f       	sbci	r27, 0xFF	; 255
+  fa:	2c 91       	ld	r18, X
+  fc:	22 23       	and	r18, r18
+  fe:	f9 f0       	breq	.+62     	; 0x13e <__vector_19+0xac>
+				// Nothing
+			}
+			else if (states[dynamicIndicationFlag][i] == RED){
+ 100:	21 30       	cpi	r18, 0x01	; 1
+ 102:	71 f4       	brne	.+28     	; 0x120 <__vector_19+0x8e>
+				PORTC |= (1 << redColumns[i]);
+ 104:	05 b3       	in	r16, 0x15	; 21
+ 106:	dc 01       	movw	r26, r24
+ 108:	a7 59       	subi	r26, 0x97	; 151
+ 10a:	bf 4f       	sbci	r27, 0xFF	; 255
+ 10c:	9a 01       	movw	r18, r20
+ 10e:	0c 90       	ld	r0, X
+ 110:	02 c0       	rjmp	.+4      	; 0x116 <__vector_19+0x84>
+ 112:	22 0f       	add	r18, r18
+ 114:	33 1f       	adc	r19, r19
+ 116:	0a 94       	dec	r0
+ 118:	e2 f7       	brpl	.-8      	; 0x112 <__vector_19+0x80>
+ 11a:	20 2b       	or	r18, r16
+ 11c:	25 bb       	out	0x15, r18	; 21
+ 11e:	0f c0       	rjmp	.+30     	; 0x13e <__vector_19+0xac>
+			}
+			else if (states[dynamicIndicationFlag][i] == GREEN){
+ 120:	22 30       	cpi	r18, 0x02	; 2
+ 122:	69 f4       	brne	.+26     	; 0x13e <__vector_19+0xac>
+				PORTC |= (1 << greenColumns[i]);
+ 124:	05 b3       	in	r16, 0x15	; 21
+ 126:	dc 01       	movw	r26, r24
+ 128:	aa 59       	subi	r26, 0x9A	; 154
+ 12a:	bf 4f       	sbci	r27, 0xFF	; 255
+ 12c:	9a 01       	movw	r18, r20
+ 12e:	0c 90       	ld	r0, X
+ 130:	02 c0       	rjmp	.+4      	; 0x136 <__vector_19+0xa4>
+ 132:	22 0f       	add	r18, r18
+ 134:	33 1f       	adc	r19, r19
+ 136:	0a 94       	dec	r0
+ 138:	e2 f7       	brpl	.-8      	; 0x132 <__vector_19+0xa0>
+ 13a:	20 2b       	or	r18, r16
+ 13c:	25 bb       	out	0x15, r18	; 21
+			}
+			if ((dynamicIndicationFlag == currentRow) and (i == currentColumn)){
+ 13e:	30 81       	ld	r19, Z
+ 140:	28 81       	ld	r18, Y
+ 142:	32 13       	cpse	r19, r18
+ 144:	11 c0       	rjmp	.+34     	; 0x168 <__vector_19+0xd6>
+ 146:	db 01       	movw	r26, r22
+ 148:	2c 91       	ld	r18, X
+ 14a:	12 13       	cpse	r17, r18
+ 14c:	0d c0       	rjmp	.+26     	; 0x168 <__vector_19+0xd6>
+				PORTD |= (1 << blueColumns[i]);
+ 14e:	12 b3       	in	r17, 0x12	; 18
+ 150:	dc 01       	movw	r26, r24
+ 152:	ad 59       	subi	r26, 0x9D	; 157
+ 154:	bf 4f       	sbci	r27, 0xFF	; 255
+ 156:	9a 01       	movw	r18, r20
+ 158:	0c 90       	ld	r0, X
+ 15a:	02 c0       	rjmp	.+4      	; 0x160 <__vector_19+0xce>
+ 15c:	22 0f       	add	r18, r18
+ 15e:	33 1f       	adc	r19, r19
+ 160:	0a 94       	dec	r0
+ 162:	e2 f7       	brpl	.-8      	; 0x15c <__vector_19+0xca>
+ 164:	21 2b       	or	r18, r17
+ 166:	22 bb       	out	0x12, r18	; 18
+ 168:	01 96       	adiw	r24, 0x01	; 1
+	// We will use it in the timer
+	void DynamicIndication(void){
+		PORTD |= ((1 << ROW_0) | (1 << ROW_1) | (1 << ROW_2));
+		PORTC &= ~((1 << COL_R_0) | (1 << COL_R_1) | (1 << COL_R_2) | (1 << COL_G_0) | (1 << COL_G_1) | (1 << COL_G_2));
+		PORTD &= ~((1 << COL_B_0) | (1 << COL_B_1) | (1 << COL_B_2));
+		for (uint8_t i = 0; i < COLS_AMOUNT; i++){
+ 16a:	83 30       	cpi	r24, 0x03	; 3
+ 16c:	91 05       	cpc	r25, r1
+ 16e:	09 f0       	breq	.+2      	; 0x172 <__vector_19+0xe0>
+ 170:	b8 cf       	rjmp	.-144    	; 0xe2 <__vector_19+0x50>
+			}
+			if ((dynamicIndicationFlag == currentRow) and (i == currentColumn)){
+				PORTD |= (1 << blueColumns[i]);
+			}
+		}
+		PORTD &= ~(1 << rows[dynamicIndicationFlag]);
+ 172:	32 b3       	in	r19, 0x12	; 18
+ 174:	20 91 78 00 	lds	r18, 0x0078
+ 178:	e2 2f       	mov	r30, r18
+ 17a:	f0 e0       	ldi	r31, 0x00	; 0
+ 17c:	e0 5a       	subi	r30, 0xA0	; 160
+ 17e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 180:	81 e0       	ldi	r24, 0x01	; 1
+ 182:	90 e0       	ldi	r25, 0x00	; 0
+ 184:	00 80       	ld	r0, Z
+ 186:	02 c0       	rjmp	.+4      	; 0x18c <__vector_19+0xfa>
+ 188:	88 0f       	add	r24, r24
+ 18a:	99 1f       	adc	r25, r25
+ 18c:	0a 94       	dec	r0
+ 18e:	e2 f7       	brpl	.-8      	; 0x188 <__vector_19+0xf6>
+ 190:	80 95       	com	r24
+ 192:	83 23       	and	r24, r19
+ 194:	82 bb       	out	0x12, r24	; 18
+		if (dynamicIndicationFlag == 0){
+ 196:	21 11       	cpse	r18, r1
+ 198:	04 c0       	rjmp	.+8      	; 0x1a2 <__vector_19+0x110>
+			dynamicIndicationFlag = 1;
+ 19a:	81 e0       	ldi	r24, 0x01	; 1
+ 19c:	80 93 78 00 	sts	0x0078, r24
+ 1a0:	89 c0       	rjmp	.+274    	; 0x2b4 <__vector_19+0x222>
+		}
+		else if (dynamicIndicationFlag == 1){
+ 1a2:	21 30       	cpi	r18, 0x01	; 1
+ 1a4:	21 f4       	brne	.+8      	; 0x1ae <__vector_19+0x11c>
+			dynamicIndicationFlag = 2;
+ 1a6:	82 e0       	ldi	r24, 0x02	; 2
+ 1a8:	80 93 78 00 	sts	0x0078, r24
+ 1ac:	83 c0       	rjmp	.+262    	; 0x2b4 <__vector_19+0x222>
+		}
+		else if (dynamicIndicationFlag == 2){
+ 1ae:	22 30       	cpi	r18, 0x02	; 2
+ 1b0:	09 f0       	breq	.+2      	; 0x1b4 <__vector_19+0x122>
+ 1b2:	80 c0       	rjmp	.+256    	; 0x2b4 <__vector_19+0x222>
+			dynamicIndicationFlag = 0;
+ 1b4:	10 92 78 00 	sts	0x0078, r1
+ 1b8:	7d c0       	rjmp	.+250    	; 0x2b4 <__vector_19+0x222>
+		// x x x x   o o o o   o o o o
+		// o o o o	 x x x x   o o o o
+		// o o o o	 o o o o   x x x x
+		for (uint8_t i = 0; i < ROWS_AMOUNT; i++){
+			for (uint8_t j = 0; j < COLS_AMOUNT; j++){
+				if (states[i][j] > 0){
+ 1ba:	41 91       	ld	r20, Z+
+ 1bc:	44 23       	and	r20, r20
+ 1be:	69 f0       	breq	.+26     	; 0x1da <__vector_19+0x148>
+					sum += states[i][j];
+ 1c0:	54 0f       	add	r21, r20
+ 1c2:	61 50       	subi	r22, 0x01	; 1
+		// Checking if there is a horizontal winning combination
+		// x x x x   o o o o   o o o o
+		// o o o o	 x x x x   o o o o
+		// o o o o	 o o o o   x x x x
+		for (uint8_t i = 0; i < ROWS_AMOUNT; i++){
+			for (uint8_t j = 0; j < COLS_AMOUNT; j++){
+ 1c4:	d1 f7       	brne	.-12     	; 0x1ba <__vector_19+0x128>
+					sum = 0;
+					anyEmptyCells = 1;
+					break;
+				}
+			}
+			if (sum == 3){
+ 1c6:	53 30       	cpi	r21, 0x03	; 3
+ 1c8:	19 f4       	brne	.+6      	; 0x1d0 <__vector_19+0x13e>
+				PORTB |= (1 << PLAYER_1_G);
+ 1ca:	c4 9a       	sbi	0x18, 4	; 24
+				PORTB &= ~(1 << PLAYER_2_R);
+ 1cc:	c2 98       	cbi	0x18, 2	; 24
+ 1ce:	7b c0       	rjmp	.+246    	; 0x2c6 <__vector_19+0x234>
+				return PLAYER_1_WON;
+			}
+			else if (sum == 6){
+ 1d0:	56 30       	cpi	r21, 0x06	; 6
+ 1d2:	21 f4       	brne	.+8      	; 0x1dc <__vector_19+0x14a>
+				PORTB |= (1 << PLAYER_2_G);
+ 1d4:	c1 9a       	sbi	0x18, 1	; 24
+				PORTB &= ~(1 << PLAYER_1_R);
+ 1d6:	c5 98       	cbi	0x18, 5	; 24
+ 1d8:	76 c0       	rjmp	.+236    	; 0x2c6 <__vector_19+0x234>
+				if (states[i][j] > 0){
+					sum += states[i][j];
+				}
+				else if (states[i][j] == 0){
+					sum = 0;
+					anyEmptyCells = 1;
+ 1da:	7a 2f       	mov	r23, r26
+ 1dc:	03 96       	adiw	r24, 0x03	; 3
+		uint8_t anyEmptyCells = 0;
+		// Checking if there is a horizontal winning combination
+		// x x x x   o o o o   o o o o
+		// o o o o	 x x x x   o o o o
+		// o o o o	 o o o o   x x x x
+		for (uint8_t i = 0; i < ROWS_AMOUNT; i++){
+ 1de:	82 17       	cp	r24, r18
+ 1e0:	93 07       	cpc	r25, r19
+ 1e2:	41 f4       	brne	.+16     	; 0x1f4 <__vector_19+0x162>
+ 1e4:	4f e6       	ldi	r20, 0x6F	; 111
+ 1e6:	50 e0       	ldi	r21, 0x00	; 0
+ 1e8:	2c e6       	ldi	r18, 0x6C	; 108
+ 1ea:	30 e0       	ldi	r19, 0x00	; 0
+				if (states[i][j] > 0){
+					sum += states[i][j];
+				}
+				else if (states[i][j] == 0){
+					sum = 0;
+					anyEmptyCells = 1;
+ 1ec:	d0 e0       	ldi	r29, 0x00	; 0
+ 1ee:	c0 e0       	ldi	r28, 0x00	; 0
+ 1f0:	b0 e0       	ldi	r27, 0x00	; 0
+ 1f2:	1e c0       	rjmp	.+60     	; 0x230 <__vector_19+0x19e>
+	// Dynamic indication function allows to show the matrix
+	// We will use it in the timer
+	void DynamicIndication(void){
+		PORTD |= ((1 << ROW_0) | (1 << ROW_1) | (1 << ROW_2));
+		PORTC &= ~((1 << COL_R_0) | (1 << COL_R_1) | (1 << COL_R_2) | (1 << COL_G_0) | (1 << COL_G_1) | (1 << COL_G_2));
+		PORTD &= ~((1 << COL_B_0) | (1 << COL_B_1) | (1 << COL_B_2));
+ 1f4:	fc 01       	movw	r30, r24
+ 1f6:	6c 2f       	mov	r22, r28
+ 1f8:	5b 2f       	mov	r21, r27
+ 1fa:	df cf       	rjmp	.-66     	; 0x1ba <__vector_19+0x128>
+ 1fc:	f9 01       	movw	r30, r18
+ 1fe:	e8 0f       	add	r30, r24
+ 200:	f9 1f       	adc	r31, r25
+		// x o o o   o x o o   o o x o   o o o x
+		// x o o o   o x o o   o o x o   o o o x
+		// x o o o   o x o o   o o x o   o o o x
+		for (uint8_t i = 0; i < COLS_AMOUNT; i++){
+			for (uint8_t j = 0; j < ROWS_AMOUNT; j++){
+				if (states[j][i] > 0){
+ 202:	60 81       	ld	r22, Z
+ 204:	66 23       	and	r22, r22
+ 206:	79 f0       	breq	.+30     	; 0x226 <__vector_19+0x194>
+					sum += states[j][i];
+ 208:	a6 0f       	add	r26, r22
+ 20a:	03 96       	adiw	r24, 0x03	; 3
+		// Check if there is a vertical winning combination
+		// x o o o   o x o o   o o x o   o o o x
+		// x o o o   o x o o   o o x o   o o o x
+		// x o o o   o x o o   o o x o   o o o x
+		for (uint8_t i = 0; i < COLS_AMOUNT; i++){
+			for (uint8_t j = 0; j < ROWS_AMOUNT; j++){
+ 20c:	89 30       	cpi	r24, 0x09	; 9
+ 20e:	91 05       	cpc	r25, r1
+ 210:	a9 f7       	brne	.-22     	; 0x1fc <__vector_19+0x16a>
+				else if (states[j][i] == 0){
+					sum = 0;
+					break;
+				}
+			}
+			if (sum == 3){
+ 212:	a3 30       	cpi	r26, 0x03	; 3
+ 214:	19 f4       	brne	.+6      	; 0x21c <__vector_19+0x18a>
+				PORTB |= (1 << PLAYER_1_G);
+ 216:	c4 9a       	sbi	0x18, 4	; 24
+				PORTB &= ~(1 << PLAYER_2_R);
+ 218:	c2 98       	cbi	0x18, 2	; 24
+ 21a:	55 c0       	rjmp	.+170    	; 0x2c6 <__vector_19+0x234>
+				return PLAYER_1_WON;
+			}
+			else if (sum == 6){
+ 21c:	a6 30       	cpi	r26, 0x06	; 6
+ 21e:	19 f4       	brne	.+6      	; 0x226 <__vector_19+0x194>
+				PORTB |= (1 << PLAYER_2_G);
+ 220:	c1 9a       	sbi	0x18, 1	; 24
+				PORTB &= ~(1 << PLAYER_1_R);
+ 222:	c5 98       	cbi	0x18, 5	; 24
+ 224:	50 c0       	rjmp	.+160    	; 0x2c6 <__vector_19+0x234>
+ 226:	2f 5f       	subi	r18, 0xFF	; 255
+ 228:	3f 4f       	sbci	r19, 0xFF	; 255
+		sum = 0;
+		// Check if there is a vertical winning combination
+		// x o o o   o x o o   o o x o   o o o x
+		// x o o o   o x o o   o o x o   o o o x
+		// x o o o   o x o o   o o x o   o o o x
+		for (uint8_t i = 0; i < COLS_AMOUNT; i++){
+ 22a:	24 17       	cp	r18, r20
+ 22c:	35 07       	cpc	r19, r21
+ 22e:	21 f0       	breq	.+8      	; 0x238 <__vector_19+0x1a6>
+				if (states[i][j] > 0){
+					sum += states[i][j];
+				}
+				else if (states[i][j] == 0){
+					sum = 0;
+					anyEmptyCells = 1;
+ 230:	8d 2f       	mov	r24, r29
+ 232:	9c 2f       	mov	r25, r28
+ 234:	ab 2f       	mov	r26, r27
+ 236:	e2 cf       	rjmp	.-60     	; 0x1fc <__vector_19+0x16a>
+		sum = 0;
+		// Check if there is a diagonal winning combination
+		// x o o
+		// o x o
+		// o o x
+		if ((states[0][0]) and (states[1][1]) and (states[2][2])){
+ 238:	20 91 6c 00 	lds	r18, 0x006C
+ 23c:	22 23       	and	r18, r18
+ 23e:	c1 f0       	breq	.+48     	; 0x270 <__vector_19+0x1de>
+ 240:	80 91 70 00 	lds	r24, 0x0070
+ 244:	88 23       	and	r24, r24
+ 246:	a1 f0       	breq	.+40     	; 0x270 <__vector_19+0x1de>
+ 248:	30 91 74 00 	lds	r19, 0x0074
+ 24c:	33 23       	and	r19, r19
+ 24e:	81 f0       	breq	.+32     	; 0x270 <__vector_19+0x1de>
+			if ((states[0][0] + states[1][1] + states[2][2]) == 3){
+ 250:	90 e0       	ldi	r25, 0x00	; 0
+ 252:	82 0f       	add	r24, r18
+ 254:	91 1d       	adc	r25, r1
+ 256:	83 0f       	add	r24, r19
+ 258:	91 1d       	adc	r25, r1
+ 25a:	83 30       	cpi	r24, 0x03	; 3
+ 25c:	91 05       	cpc	r25, r1
+ 25e:	19 f4       	brne	.+6      	; 0x266 <__vector_19+0x1d4>
+				PORTB |= (1 << PLAYER_1_G);
+ 260:	c4 9a       	sbi	0x18, 4	; 24
+				PORTB &= ~(1 << PLAYER_2_R);
+ 262:	c2 98       	cbi	0x18, 2	; 24
+ 264:	30 c0       	rjmp	.+96     	; 0x2c6 <__vector_19+0x234>
+				return PLAYER_1_WON;
+			}
+			else if((states[0][0] + states[1][1] + states[2][2]) == 6){
+ 266:	06 97       	sbiw	r24, 0x06	; 6
+ 268:	19 f4       	brne	.+6      	; 0x270 <__vector_19+0x1de>
+				PORTB |= (1 << PLAYER_2_G);
+ 26a:	c1 9a       	sbi	0x18, 1	; 24
+				PORTB &= ~(1 << PLAYER_1_R);
+ 26c:	c5 98       	cbi	0x18, 5	; 24
+ 26e:	2b c0       	rjmp	.+86     	; 0x2c6 <__vector_19+0x234>
+				return PLAYER_2_WON;
+			}
+		}
+		if ((states[0][2]) and (states[1][1]) and (states[2][0])){
+ 270:	20 91 6e 00 	lds	r18, 0x006E
+ 274:	22 23       	and	r18, r18
+ 276:	c1 f0       	breq	.+48     	; 0x2a8 <__vector_19+0x216>
+ 278:	80 91 70 00 	lds	r24, 0x0070
+ 27c:	88 23       	and	r24, r24
+ 27e:	a1 f0       	breq	.+40     	; 0x2a8 <__vector_19+0x216>
+ 280:	30 91 72 00 	lds	r19, 0x0072
+ 284:	33 23       	and	r19, r19
+ 286:	81 f0       	breq	.+32     	; 0x2a8 <__vector_19+0x216>
+			if ((states[0][2] + states[1][1] + states[2][0]) == 3){
+ 288:	90 e0       	ldi	r25, 0x00	; 0
+ 28a:	82 0f       	add	r24, r18
+ 28c:	91 1d       	adc	r25, r1
+ 28e:	83 0f       	add	r24, r19
+ 290:	91 1d       	adc	r25, r1
+ 292:	83 30       	cpi	r24, 0x03	; 3
+ 294:	91 05       	cpc	r25, r1
+ 296:	19 f4       	brne	.+6      	; 0x29e <__vector_19+0x20c>
+				PORTB |= (1 << PLAYER_1_G);
+ 298:	c4 9a       	sbi	0x18, 4	; 24
+				PORTB &= ~(1 << PLAYER_2_R);
+ 29a:	c2 98       	cbi	0x18, 2	; 24
+ 29c:	14 c0       	rjmp	.+40     	; 0x2c6 <__vector_19+0x234>
+				return PLAYER_1_WON;
+			}
+			else if((states[0][2] + states[1][1] + states[2][0]) == 6){
+ 29e:	06 97       	sbiw	r24, 0x06	; 6
+ 2a0:	19 f4       	brne	.+6      	; 0x2a8 <__vector_19+0x216>
+				PORTB |= (1 << PLAYER_2_G);
+ 2a2:	c1 9a       	sbi	0x18, 1	; 24
+				PORTB &= ~(1 << PLAYER_1_R);
+ 2a4:	c5 98       	cbi	0x18, 5	; 24
+ 2a6:	0f c0       	rjmp	.+30     	; 0x2c6 <__vector_19+0x234>
+				return PLAYER_2_WON;
+			}
+		}
+		// Check if there are any empty cells, if not then it is a tie
+		if (anyEmptyCells == 0){
+ 2a8:	71 11       	cpse	r23, r1
+ 2aa:	32 c0       	rjmp	.+100    	; 0x310 <__vector_19+0x27e>
+			PORTB |= (1 << PLAYER_1_B) | (1 << PLAYER_2_B);
+ 2ac:	88 b3       	in	r24, 0x18	; 24
+ 2ae:	89 60       	ori	r24, 0x09	; 9
+ 2b0:	88 bb       	out	0x18, r24	; 24
+ 2b2:	09 c0       	rjmp	.+18     	; 0x2c6 <__vector_19+0x234>
+ 2b4:	25 e7       	ldi	r18, 0x75	; 117
+ 2b6:	30 e0       	ldi	r19, 0x00	; 0
+				if (states[i][j] > 0){
+					sum += states[i][j];
+				}
+				else if (states[i][j] == 0){
+					sum = 0;
+					anyEmptyCells = 1;
+ 2b8:	8c e6       	ldi	r24, 0x6C	; 108
+ 2ba:	90 e0       	ldi	r25, 0x00	; 0
+ 2bc:	70 e0       	ldi	r23, 0x00	; 0
+	// Dynamic indication function allows to show the matrix
+	// We will use it in the timer
+	void DynamicIndication(void){
+		PORTD |= ((1 << ROW_0) | (1 << ROW_1) | (1 << ROW_2));
+		PORTC &= ~((1 << COL_R_0) | (1 << COL_R_1) | (1 << COL_R_2) | (1 << COL_G_0) | (1 << COL_G_1) | (1 << COL_G_2));
+		PORTD &= ~((1 << COL_B_0) | (1 << COL_B_1) | (1 << COL_B_2));
+ 2be:	c3 e0       	ldi	r28, 0x03	; 3
+ 2c0:	b0 e0       	ldi	r27, 0x00	; 0
+				if (states[i][j] > 0){
+					sum += states[i][j];
+				}
+				else if (states[i][j] == 0){
+					sum = 0;
+					anyEmptyCells = 1;
+ 2c2:	a1 e0       	ldi	r26, 0x01	; 1
+ 2c4:	97 cf       	rjmp	.-210    	; 0x1f4 <__vector_19+0x162>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2c6:	bf ef       	ldi	r27, 0xFF	; 255
+ 2c8:	29 e6       	ldi	r18, 0x69	; 105
+ 2ca:	88 e1       	ldi	r24, 0x18	; 24
+ 2cc:	b1 50       	subi	r27, 0x01	; 1
+ 2ce:	20 40       	sbci	r18, 0x00	; 0
+ 2d0:	80 40       	sbci	r24, 0x00	; 0
+ 2d2:	e1 f7       	brne	.-8      	; 0x2cc <__vector_19+0x23a>
+ 2d4:	00 c0       	rjmp	.+0      	; 0x2d6 <__vector_19+0x244>
+ 2d6:	00 00       	nop
+	// Dynamic indication
+	XO.DynamicIndication();
+	// Check if someone won and reset the game in that case
+	if (XO.CheckEnd() != 0){
+		_delay_ms(1000);
+		PORTB = 0x00;
+ 2d8:	18 ba       	out	0x18, r1	; 24
+	}
+	// Initialization function
+	void Initialization(void){
+		for (uint8_t i = 0; i < ROWS_AMOUNT; i++){
+			for (uint8_t j = 0; j < COLS_AMOUNT; j++){
+				states[i][j] = OFF;
+ 2da:	10 92 6c 00 	sts	0x006C, r1
+ 2de:	10 92 6d 00 	sts	0x006D, r1
+ 2e2:	10 92 6e 00 	sts	0x006E, r1
+ 2e6:	10 92 6f 00 	sts	0x006F, r1
+ 2ea:	10 92 70 00 	sts	0x0070, r1
+ 2ee:	10 92 71 00 	sts	0x0071, r1
+ 2f2:	10 92 72 00 	sts	0x0072, r1
+ 2f6:	10 92 73 00 	sts	0x0073, r1
+ 2fa:	10 92 74 00 	sts	0x0074, r1
+			}
+		}
+		dynamicIndicationFlag = 0;
+ 2fe:	10 92 78 00 	sts	0x0078, r1
+		turnFlag = PLAYER_1_TURN;
+ 302:	81 e0       	ldi	r24, 0x01	; 1
+ 304:	80 93 77 00 	sts	0x0077, r24
+			dynamicIndicationFlag = 0;
+		}
+	}
+	// Resets the cursor to (0;0) position
+	void SetInitialPosition(void){
+		currentColumn = 0;
+ 308:	10 92 76 00 	sts	0x0076, r1
+		currentRow = 0;
+ 30c:	10 92 75 00 	sts	0x0075, r1
+		XO.Initialization();
+	}
+	else {
+		// nothing
+	}
+}
+ 310:	ff 91       	pop	r31
+ 312:	ef 91       	pop	r30
+ 314:	df 91       	pop	r29
+ 316:	cf 91       	pop	r28
+ 318:	bf 91       	pop	r27
+ 31a:	af 91       	pop	r26
+ 31c:	9f 91       	pop	r25
+ 31e:	8f 91       	pop	r24
+ 320:	7f 91       	pop	r23
+ 322:	6f 91       	pop	r22
+ 324:	5f 91       	pop	r21
+ 326:	4f 91       	pop	r20
+ 328:	3f 91       	pop	r19
+ 32a:	2f 91       	pop	r18
+ 32c:	1f 91       	pop	r17
+ 32e:	0f 91       	pop	r16
+ 330:	0f 90       	pop	r0
+ 332:	0f be       	out	0x3f, r0	; 63
+ 334:	0f 90       	pop	r0
+ 336:	1f 90       	pop	r1
+ 338:	18 95       	reti
+
+0000033a <_Z20TimersInitializationv>:
+		}
+    }
+}
+
+void TimersInitialization(void){
+	TIMSK |= (1 << OCIE0);
+ 33a:	89 b7       	in	r24, 0x39	; 57
+ 33c:	82 60       	ori	r24, 0x02	; 2
+ 33e:	89 bf       	out	0x39, r24	; 57
+	TCCR0 |= (1 << CS01) | (1 << CS00);
+ 340:	83 b7       	in	r24, 0x33	; 51
+ 342:	83 60       	ori	r24, 0x03	; 3
+ 344:	83 bf       	out	0x33, r24	; 51
+ 346:	08 95       	ret
+
+00000348 <_Z19PortsInitializationv>:
+}
+
+void PortsInitialization(void){
+	DDRA |= (0 << LEFT) | (0 << RIGHT) | (0 << SET);
+ 348:	8a b3       	in	r24, 0x1a	; 26
+ 34a:	8a bb       	out	0x1a, r24	; 26
+	DDRB |= (1 << PLAYER_1_R) | (1 << PLAYER_1_G) | (1 << PLAYER_1_B) | (1 << PLAYER_2_R) | (1 << PLAYER_2_G) | (1 << PLAYER_2_B);
+ 34c:	87 b3       	in	r24, 0x17	; 23
+ 34e:	8f 63       	ori	r24, 0x3F	; 63
+ 350:	87 bb       	out	0x17, r24	; 23
+	DDRC |= (1 << COL_R_0) | (1 << COL_R_1) | (1 << COL_R_2) | (1 << COL_G_0) | (1 << COL_G_1) | (1 << COL_G_2);
+ 352:	84 b3       	in	r24, 0x14	; 20
+ 354:	8f 63       	ori	r24, 0x3F	; 63
+ 356:	84 bb       	out	0x14, r24	; 20
+	DDRD |= (1 << COL_B_0) | (1 << COL_B_1) | (1 << COL_B_2) | (1 << ROW_0) | (1 << ROW_1) | (1 << ROW_2);
+ 358:	81 b3       	in	r24, 0x11	; 17
+ 35a:	87 6e       	ori	r24, 0xE7	; 231
+ 35c:	81 bb       	out	0x11, r24	; 17
+ 35e:	08 95       	ret
+
+00000360 <main>:
+		// nothing
+	}
+}
+
+int main(void){
+	PortsInitialization();
+ 360:	0e 94 a4 01 	call	0x348	; 0x348 <_Z19PortsInitializationv>
+	TimersInitialization();
+ 364:	0e 94 9d 01 	call	0x33a	; 0x33a <_Z20TimersInitializationv>
+	}
+	// Initialization function
+	void Initialization(void){
+		for (uint8_t i = 0; i < ROWS_AMOUNT; i++){
+			for (uint8_t j = 0; j < COLS_AMOUNT; j++){
+				states[i][j] = OFF;
+ 368:	10 92 6c 00 	sts	0x006C, r1
+ 36c:	10 92 6d 00 	sts	0x006D, r1
+ 370:	10 92 6e 00 	sts	0x006E, r1
+ 374:	10 92 6f 00 	sts	0x006F, r1
+ 378:	10 92 70 00 	sts	0x0070, r1
+ 37c:	10 92 71 00 	sts	0x0071, r1
+ 380:	10 92 72 00 	sts	0x0072, r1
+ 384:	10 92 73 00 	sts	0x0073, r1
+ 388:	10 92 74 00 	sts	0x0074, r1
+			}
+		}
+		dynamicIndicationFlag = 0;
+ 38c:	10 92 78 00 	sts	0x0078, r1
+		turnFlag = PLAYER_1_TURN;
+ 390:	81 e0       	ldi	r24, 0x01	; 1
+ 392:	80 93 77 00 	sts	0x0077, r24
+			dynamicIndicationFlag = 0;
+		}
+	}
+	// Resets the cursor to (0;0) position
+	void SetInitialPosition(void){
+		currentColumn = 0;
+ 396:	10 92 76 00 	sts	0x0076, r1
+		currentRow = 0;
+ 39a:	10 92 75 00 	sts	0x0075, r1
+int main(void){
+	PortsInitialization();
+	TimersInitialization();
+	// Set up of the XO field
+	XO.Initialization();
+	PORTB = 0x00;
+ 39e:	18 ba       	out	0x18, r1	; 24
+	sei();
+ 3a0:	78 94       	sei
+		// If LEFT button pressed move the cursor
+		if (!(PINA & (1 << LEFT))){
+			_delay_ms(50);
+			if ((PINA & (1 << LEFT))){
+				// If the cursor was at (0;0) then move it to (2;3)
+				if (XO.currentColumn == 0){
+ 3a2:	e6 e7       	ldi	r30, 0x76	; 118
+ 3a4:	f0 e0       	ldi	r31, 0x00	; 0
+					if (XO.currentRow == 0){
+ 3a6:	a5 e7       	ldi	r26, 0x75	; 117
+ 3a8:	b0 e0       	ldi	r27, 0x00	; 0
+						XO.currentColumn = 2;
+					}
+					// If the cursor was at (i;0), i > 0, move it to (i-1;3)
+					else if (XO.currentRow != 0){
+						XO.currentRow--;
+						XO.currentColumn = 2;
+ 3aa:	62 e0       	ldi	r22, 0x02	; 2
+		currentRow = 0;
+	}
+	// Sets the LED to be Red(X) or Green(O), depending on whos turn is at present
+	void SetCurrentState(void){
+		// Changing the state of the LED where the cursor is to Green(O) or Red(X)
+		states[currentRow][currentColumn] = turnFlag;
+ 3ac:	47 e7       	ldi	r20, 0x77	; 119
+ 3ae:	50 e0       	ldi	r21, 0x00	; 0
+		// Changing the turn flag, so that another player will have a turn
+		if (turnFlag == PLAYER_1_TURN){
+			turnFlag = PLAYER_2_TURN;
+		}
+		else if (turnFlag == PLAYER_2_TURN){
+			turnFlag = PLAYER_1_TURN;
+ 3b0:	71 e0       	ldi	r23, 0x01	; 1
+	XO.Initialization();
+	PORTB = 0x00;
+	sei();
+    while(1){
+		// If LEFT button pressed move the cursor
+		if (!(PINA & (1 << LEFT))){
+ 3b2:	cf 99       	sbic	0x19, 7	; 25
+ 3b4:	1a c0       	rjmp	.+52     	; 0x3ea <main+0x8a>
+ 3b6:	2f e7       	ldi	r18, 0x7F	; 127
+ 3b8:	88 e3       	ldi	r24, 0x38	; 56
+ 3ba:	91 e0       	ldi	r25, 0x01	; 1
+ 3bc:	21 50       	subi	r18, 0x01	; 1
+ 3be:	80 40       	sbci	r24, 0x00	; 0
+ 3c0:	90 40       	sbci	r25, 0x00	; 0
+ 3c2:	e1 f7       	brne	.-8      	; 0x3bc <main+0x5c>
+ 3c4:	00 c0       	rjmp	.+0      	; 0x3c6 <main+0x66>
+ 3c6:	00 00       	nop
+			_delay_ms(50);
+			if ((PINA & (1 << LEFT))){
+ 3c8:	cf 9b       	sbis	0x19, 7	; 25
+ 3ca:	0f c0       	rjmp	.+30     	; 0x3ea <main+0x8a>
+				// If the cursor was at (0;0) then move it to (2;3)
+				if (XO.currentColumn == 0){
+ 3cc:	80 81       	ld	r24, Z
+ 3ce:	81 11       	cpse	r24, r1
+ 3d0:	0a c0       	rjmp	.+20     	; 0x3e6 <main+0x86>
+					if (XO.currentRow == 0){
+ 3d2:	8c 91       	ld	r24, X
+ 3d4:	81 11       	cpse	r24, r1
+ 3d6:	03 c0       	rjmp	.+6      	; 0x3de <main+0x7e>
+						XO.currentRow = 2;
+ 3d8:	6c 93       	st	X, r22
+						XO.currentColumn = 2;
+ 3da:	60 83       	st	Z, r22
+ 3dc:	06 c0       	rjmp	.+12     	; 0x3ea <main+0x8a>
+					}
+					// If the cursor was at (i;0), i > 0, move it to (i-1;3)
+					else if (XO.currentRow != 0){
+						XO.currentRow--;
+ 3de:	81 50       	subi	r24, 0x01	; 1
+ 3e0:	8c 93       	st	X, r24
+						XO.currentColumn = 2;
+ 3e2:	60 83       	st	Z, r22
+ 3e4:	02 c0       	rjmp	.+4      	; 0x3ea <main+0x8a>
+					}
+				}
+				// If the cursor was at (i;j), j > 0, move it to (i;j-1)
+				else if (XO.currentColumn != 0){
+					XO.currentColumn--;
+ 3e6:	81 50       	subi	r24, 0x01	; 1
+ 3e8:	80 83       	st	Z, r24
+				}
+			}
+		}
+		// If RIGHT button pressed move the cursor
+		if (!(PINA & (1 << RIGHT))){
+ 3ea:	ce 99       	sbic	0x19, 6	; 25
+ 3ec:	1a c0       	rjmp	.+52     	; 0x422 <main+0xc2>
+ 3ee:	cf e7       	ldi	r28, 0x7F	; 127
+ 3f0:	d8 e3       	ldi	r29, 0x38	; 56
+ 3f2:	21 e0       	ldi	r18, 0x01	; 1
+ 3f4:	c1 50       	subi	r28, 0x01	; 1
+ 3f6:	d0 40       	sbci	r29, 0x00	; 0
+ 3f8:	20 40       	sbci	r18, 0x00	; 0
+ 3fa:	e1 f7       	brne	.-8      	; 0x3f4 <main+0x94>
+ 3fc:	00 c0       	rjmp	.+0      	; 0x3fe <main+0x9e>
+ 3fe:	00 00       	nop
+			_delay_ms(50);
+			if ((PINA & (1 << RIGHT))){
+ 400:	ce 9b       	sbis	0x19, 6	; 25
+ 402:	0f c0       	rjmp	.+30     	; 0x422 <main+0xc2>
+				// If the cursor was at (2;3) move it to (0;0)
+				if (XO.currentColumn == 2){
+ 404:	80 81       	ld	r24, Z
+ 406:	82 30       	cpi	r24, 0x02	; 2
+ 408:	51 f4       	brne	.+20     	; 0x41e <main+0xbe>
+					if (XO.currentRow == 2){
+ 40a:	8c 91       	ld	r24, X
+ 40c:	82 30       	cpi	r24, 0x02	; 2
+ 40e:	19 f4       	brne	.+6      	; 0x416 <main+0xb6>
+						XO.currentColumn = 0;
+ 410:	10 82       	st	Z, r1
+						XO.currentRow = 0;
+ 412:	1c 92       	st	X, r1
+ 414:	06 c0       	rjmp	.+12     	; 0x422 <main+0xc2>
+					}
+					// If the cursor was at (i;3), i < 2, move it to (i+1;0)
+					else if (XO.currentRow != 2){
+						XO.currentColumn = 0;
+ 416:	10 82       	st	Z, r1
+						XO.currentRow++;
+ 418:	8f 5f       	subi	r24, 0xFF	; 255
+ 41a:	8c 93       	st	X, r24
+ 41c:	02 c0       	rjmp	.+4      	; 0x422 <main+0xc2>
+					}
+				}
+				// If the cursor was at (i;j), j < 3, move it to (i;j+1)
+				else if (XO.currentColumn != 2){
+					XO.currentColumn++;
+ 41e:	8f 5f       	subi	r24, 0xFF	; 255
+ 420:	80 83       	st	Z, r24
+				}
+			}
+		}
+		// If SET button pressed
+		if (!(PINA & (1 << SET))){
+ 422:	cd 99       	sbic	0x19, 5	; 25
+ 424:	c6 cf       	rjmp	.-116    	; 0x3b2 <main+0x52>
+ 426:	8f e7       	ldi	r24, 0x7F	; 127
+ 428:	98 e3       	ldi	r25, 0x38	; 56
+ 42a:	c1 e0       	ldi	r28, 0x01	; 1
+ 42c:	81 50       	subi	r24, 0x01	; 1
+ 42e:	90 40       	sbci	r25, 0x00	; 0
+ 430:	c0 40       	sbci	r28, 0x00	; 0
+ 432:	e1 f7       	brne	.-8      	; 0x42c <main+0xcc>
+ 434:	00 c0       	rjmp	.+0      	; 0x436 <main+0xd6>
+ 436:	00 00       	nop
+			_delay_ms(50);
+			if (PINA & (1 << SET)){
+ 438:	cd 9b       	sbis	0x19, 5	; 25
+ 43a:	bb cf       	rjmp	.-138    	; 0x3b2 <main+0x52>
+				// If the position was not set to X or O then set it
+				if (XO.states[XO.currentRow][XO.currentColumn] == OFF){
+ 43c:	8c 91       	ld	r24, X
+ 43e:	90 e0       	ldi	r25, 0x00	; 0
+ 440:	20 81       	ld	r18, Z
+ 442:	30 e0       	ldi	r19, 0x00	; 0
+ 444:	ec 01       	movw	r28, r24
+ 446:	cc 0f       	add	r28, r28
+ 448:	dd 1f       	adc	r29, r29
+ 44a:	c8 0f       	add	r28, r24
+ 44c:	d9 1f       	adc	r29, r25
+ 44e:	c2 0f       	add	r28, r18
+ 450:	d3 1f       	adc	r29, r19
+ 452:	c4 59       	subi	r28, 0x94	; 148
+ 454:	df 4f       	sbci	r29, 0xFF	; 255
+ 456:	c8 81       	ld	r28, Y
+ 458:	c1 11       	cpse	r28, r1
+ 45a:	ab cf       	rjmp	.-170    	; 0x3b2 <main+0x52>
+		currentRow = 0;
+	}
+	// Sets the LED to be Red(X) or Green(O), depending on whos turn is at present
+	void SetCurrentState(void){
+		// Changing the state of the LED where the cursor is to Green(O) or Red(X)
+		states[currentRow][currentColumn] = turnFlag;
+ 45c:	ea 01       	movw	r28, r20
+ 45e:	18 81       	ld	r17, Y
+ 460:	ec 01       	movw	r28, r24
+ 462:	cc 0f       	add	r28, r28
+ 464:	dd 1f       	adc	r29, r29
+ 466:	8c 0f       	add	r24, r28
+ 468:	9d 1f       	adc	r25, r29
+ 46a:	28 0f       	add	r18, r24
+ 46c:	39 1f       	adc	r19, r25
+ 46e:	e9 01       	movw	r28, r18
+ 470:	c4 59       	subi	r28, 0x94	; 148
+ 472:	df 4f       	sbci	r29, 0xFF	; 255
+ 474:	18 83       	st	Y, r17
+		// Changing the turn flag, so that another player will have a turn
+		if (turnFlag == PLAYER_1_TURN){
+ 476:	11 30       	cpi	r17, 0x01	; 1
+ 478:	19 f4       	brne	.+6      	; 0x480 <__stack+0x21>
+			turnFlag = PLAYER_2_TURN;
+ 47a:	ea 01       	movw	r28, r20
+ 47c:	68 83       	st	Y, r22
+ 47e:	04 c0       	rjmp	.+8      	; 0x488 <__stack+0x29>
+		}
+		else if (turnFlag == PLAYER_2_TURN){
+ 480:	12 30       	cpi	r17, 0x02	; 2
+ 482:	11 f4       	brne	.+4      	; 0x488 <__stack+0x29>
+			turnFlag = PLAYER_1_TURN;
+ 484:	ea 01       	movw	r28, r20
+ 486:	78 83       	st	Y, r23
+			dynamicIndicationFlag = 0;
+		}
+	}
+	// Resets the cursor to (0;0) position
+	void SetInitialPosition(void){
+		currentColumn = 0;
+ 488:	10 82       	st	Z, r1
+		currentRow = 0;
+ 48a:	1c 92       	st	X, r1
+ 48c:	92 cf       	rjmp	.-220    	; 0x3b2 <main+0x52>
+
+0000048e <_exit>:
+ 48e:	f8 94       	cli
+
+00000490 <__stop_program>:
+ 490:	ff cf       	rjmp	.-2      	; 0x490 <__stop_program>
